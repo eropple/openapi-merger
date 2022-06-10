@@ -58,7 +58,9 @@ class Merger {
     }
     let ret = _.isArray(obj) ? [] : {};
     for (const [key, val] of Object.entries(obj)) {
-      if (key === "$ref") {
+      if (key === "example") {
+        ret[key] = val;
+      } else if (key === "$ref") {
         await this.handleRef(ret, key, val, file, jsonPath);
       } else if (key.match(Merger.INCLUDE_PATTERN)) {
         ret = await this.handleInclude(ret, key, val, file, jsonPath);
